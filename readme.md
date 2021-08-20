@@ -11,3 +11,7 @@
     types of package
         - Executable => Generates a file that can run
         - Reusable => Code used as 'helpers' Good place to put resuable logic
+
+## OOP in GO
+    In go it extend a base type and add some extra functionality to it (behavior of type)
+    Ex type deck []string -> functions with deck as a 'recevier'
