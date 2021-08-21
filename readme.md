@@ -15,3 +15,7 @@
 ## OOP in GO
     In go it extend a base type and add some extra functionality to it (behavior of type)
     Ex type deck []string -> functions with deck as a 'recevier'
+
+
+## Note
+    Array can mutable 

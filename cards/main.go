@@ -19,5 +19,7 @@ func main() {
 
 	cards := loadFromFile("inHand.txt")
 	cards.print()
+	cards.shuffle()
+	cards.print()
 
 }
