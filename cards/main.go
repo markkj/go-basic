@@ -1,10 +1,18 @@
 package main
 
+type Animal struct {
+	name string
+}
+
+type Dog Animal
+
 func main() {
-	// cards := deck{newCard(), newCard(), newCard()}
-	// cards = append(cards, "Six of Spades")
-	// cards.print()
 	cards := newDeck()
-	cards.print()
+	hand, remindCards := deal(cards, 5)
+	hand.print()
+	remindCards.print()
+
+	// greeting := "Hi there !"
+	// fmt.Println([]byte(greeting))
 
 }
