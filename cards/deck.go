@@ -49,6 +49,7 @@ func loadFromFile(filename string) deck {
 		fmt.Print("Can't load deck from file")
 		os.Exit(1)
 	}
-	return deck{string(bs)}
+	cards := strings.Split(string(bs), ",")
+	return deck(cards)
 
 }

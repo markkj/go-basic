@@ -17,7 +17,7 @@ func main() {
 	// greeting := "Hi there !"
 	// fmt.Println([]byte(greeting))
 
-	cards := loadFromFile("inHands.txt")
+	cards := loadFromFile("inHand.txt")
 	cards.print()
 
 }
