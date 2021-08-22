@@ -1,9 +1,11 @@
 package main
 
 func main() {
-	// cards := newDeck()
+	cards := newDeck()
 	// hand, remindCards := deal(cards, 5)
-	// hand.print()
+	cards.print()
+	cards.shuffle()
+	cards.print()
 	// remindCards.print()
 
 	// hand.saveToFile("inHand.txt")
@@ -11,9 +13,9 @@ func main() {
 	// greeting := "Hi there !"
 	// fmt.Println([]byte(greeting))
 
-	cards := loadFromFile("inHand.txt")
-	cards.print()
-	cards.shuffle()
-	cards.print()
+	// cards := loadFromFile("inHand.txt")
+	// cards.print()
+	// cards.shuffle()
+	// cards.print()
 
 }
