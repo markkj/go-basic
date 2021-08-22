@@ -1,11 +1,5 @@
 package main
 
-type Animal struct {
-	name string
-}
-
-type Dog Animal
-
 func main() {
 	// cards := newDeck()
 	// hand, remindCards := deal(cards, 5)
