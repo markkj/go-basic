@@ -2,7 +2,11 @@ package main
 
 import "fmt"
 
-type Bot interface {
+type user struct {
+	name string
+}
+
+type bot interface {
 	getGreeting() string
 	getName() string
 }
@@ -16,19 +20,18 @@ func main() {
 	b := bBot{}
 
 	printGreeting(a)
-	fmt.Println(b.getName())
+	printGreeting(b)
 }
 
-func printGreeting(bot Bot) {
+func printGreeting(bot bot) {
 	fmt.Println(bot.getGreeting())
 }
 
-func (a aBot) getGreetingNew() string {
-	return a.getName() + " Hello From new"
-}
-
 func (a aBot) getGreeting() string {
-	return "A Hello"
+	return a.getName() + " Hello"
+}
+func (b bBot) getGreeting() string {
+	return b.getName() + " Hello"
 }
 
 func (a aBot) getName() string {
