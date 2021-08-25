@@ -8,6 +8,8 @@ import (
 )
 
 type logWritter struct {
+	write string
+	done  bool
 }
 
 func main() {
@@ -21,11 +23,14 @@ func main() {
 	// fmt.Println(string(bs))
 	// resp.Body.Close()
 
-	lw := logWritter{}
+	lw := &logWritter{}
+	fmt.Println(lw)
 	io.Copy(lw, resp.Body)
+	fmt.Println(lw)
 
 }
 
-func (logWritter) Write(bs []byte) (int, error) {
+func (lw *logWritter) Write(bs []byte) (int, error) {
+	lw.write = string(bs)
 	return len(bs), nil
 }
