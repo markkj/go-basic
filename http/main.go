@@ -1,10 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
+
+	"github.com/markkj/go-basic/http/helpers"
 )
 
 type logWritter struct {
@@ -24,10 +27,17 @@ func main() {
 	// resp.Body.Close()
 
 	lw := &logWritter{}
-	fmt.Println(lw)
+	// fmt.Println(lw)
 	io.Copy(lw, resp.Body)
-	fmt.Println(lw)
+	// fmt.Println(lw)
 
+	h := helpers.WEBURL{}
+	h.WebURL = "http://google.com"
+	h.WebStatus = resp.Status
+	fmt.Println(h)
+
+	newJson, err := json.Marshal(h)
+	fmt.Println(string(newJson))
 }
 
 func (lw *logWritter) Write(bs []byte) (int, error) {
