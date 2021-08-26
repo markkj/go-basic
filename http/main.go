@@ -35,8 +35,8 @@ func main() {
 	h.WebURL = "http://google.com"
 	h.WebStatus = resp.Status
 	fmt.Println(h)
-
-	newJson, err := json.Marshal(h)
+	h.AddName("Google")
+	newJson, _ := json.Marshal(h)
 	fmt.Println(string(newJson))
 }
 
