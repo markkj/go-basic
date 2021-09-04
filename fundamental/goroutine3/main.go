@@ -3,24 +3,29 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
-// this tutorial in fucntion doSomethingA it maybe print or not print
+// this tutorial in fucntion doSomethingA it will print
+var wg = sync.WaitGroup{}
+
 func main() {
 	c := make(chan string)
+	wg.Add(1)
 	go doSomethingA()
 	go doSomethingB(c)
 	go doSomethingC(c)
 	fmt.Println(<-c)
 	fmt.Println(<-c)
+	wg.Wait()
 
 }
 
 func doSomethingA() {
 	time.Sleep(randomeTime() * time.Second)
 	fmt.Println("Do Something in A")
-
+	wg.Done()
 }
 
 func doSomethingB(message chan<- string) {
