@@ -18,16 +18,16 @@ type blogPost struct {
 }
 
 func main() {
-	peter := person{
+	peter := &person{
 		firstname: "Peter",
 		lastname:  "Jologo",
 	}
-	author1 := author{
-		person: peter,
+	author1 := &author{
+		person: *peter,
 	}
-	firstPost := blogPost{
+	firstPost := &blogPost{
 		title:  "firstPost",
-		author: author1,
+		author: *author1,
 	}
 	firstPost.printDetails()
 }
