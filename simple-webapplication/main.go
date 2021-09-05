@@ -2,33 +2,15 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 )
 
-func Home(rw http.ResponseWriter, r *http.Request) {
-	// fmt.Fprintf(rw, "Hello, Home Page")
-	renderTemplate(rw, "home.page.tmpl")
-}
+const portNumber = ":8080"
 
-func About(rw http.ResponseWriter, r *http.Request) {
-	// fmt.Fprintf(rw, "Hello, About Page")
-	renderTemplate(rw, "about.page.tmpl")
-
-}
-
-func renderTemplate(rw http.ResponseWriter, tmpl string) {
-	parsedTemplate, _ := template.ParseFiles("./templates/" + tmpl)
-	err := parsedTemplate.Execute(rw, nil)
-	if err != nil {
-		fmt.Println("error parsed template: ", err)
-		return
-	}
-}
 func main() {
 	http.HandleFunc("/", Home)
 	http.HandleFunc("/about", About)
 
-	fmt.Println("Starting Application")
-	_ = http.ListenAndServe(":8080", nil)
+	fmt.Printf("Starting Application running on port %s", portNumber)
+	_ = http.ListenAndServe(portNumber, nil)
 }
