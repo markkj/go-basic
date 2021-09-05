@@ -6,27 +6,30 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/markkj/simple-webapplication/pkg/config"
 )
 
 var fuctions = template.FuncMap{}
+var app *config.AppConfig
+
+func NewTemplate(a *config.AppConfig) {
+	app = a
+}
 
 func RenderTemplate(rw http.ResponseWriter, tmpl string) {
-	tc, err := RenderTemplateCache()
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
+	tc := app.TemplateCache
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get template from template cache")
 	}
 
 	buf := new(bytes.Buffer)
 
 	_ = t.Execute(buf, nil)
 
-	_, err = buf.WriteTo(rw)
+	_, err := buf.WriteTo(rw)
 
 	if err != nil {
 		log.Fatal(err)
