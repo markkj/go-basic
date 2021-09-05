@@ -12,7 +12,7 @@ type Repository struct {
 	App *config.AppConfig
 }
 
-var repo *Repository
+var Repo *Repository
 
 func NewRepo(a *config.AppConfig) *Repository {
 	return &Repository{
@@ -21,15 +21,15 @@ func NewRepo(a *config.AppConfig) *Repository {
 }
 
 func NewHandler(r *Repository) {
-	repo = r
+	Repo = r
 }
 
-func Home(rw http.ResponseWriter, r *http.Request) {
+func (m *Repository) Home(rw http.ResponseWriter, r *http.Request) {
 	// fmt.Fprintf(rw, "Hello, Home Page")
 	render.RenderTemplate(rw, "home.page.tmpl", &models.TemplateData{})
 }
 
-func About(rw http.ResponseWriter, r *http.Request) {
+func (m *Repository) About(rw http.ResponseWriter, r *http.Request) {
 	// fmt.Fprintf(rw, "Hello, About Page")
 	stringMap := make(map[string]string)
 	stringMap["test"] = "hello"
