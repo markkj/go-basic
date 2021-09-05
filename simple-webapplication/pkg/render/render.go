@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/markkj/simple-webapplication/pkg/config"
+	"github.com/markkj/simple-webapplication/pkg/models"
 )
 
 var fuctions = template.FuncMap{}
@@ -17,7 +18,7 @@ func NewTemplate(a *config.AppConfig) {
 	app = a
 }
 
-func RenderTemplate(rw http.ResponseWriter, tmpl string) {
+func RenderTemplate(rw http.ResponseWriter, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc = app.TemplateCache
@@ -32,7 +33,7 @@ func RenderTemplate(rw http.ResponseWriter, tmpl string) {
 
 	buf := new(bytes.Buffer)
 
-	_ = t.Execute(buf, nil)
+	_ = t.Execute(buf, td)
 
 	_, err := buf.WriteTo(rw)
 

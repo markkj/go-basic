@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/markkj/simple-webapplication/pkg/config"
+	"github.com/markkj/simple-webapplication/pkg/models"
 	"github.com/markkj/simple-webapplication/pkg/render"
 )
 
@@ -25,11 +26,15 @@ func NewHandler(r *Repository) {
 
 func Home(rw http.ResponseWriter, r *http.Request) {
 	// fmt.Fprintf(rw, "Hello, Home Page")
-	render.RenderTemplate(rw, "home.page.tmpl")
+	render.RenderTemplate(rw, "home.page.tmpl", &models.TemplateData{})
 }
 
 func About(rw http.ResponseWriter, r *http.Request) {
 	// fmt.Fprintf(rw, "Hello, About Page")
-	render.RenderTemplate(rw, "about.page.tmpl")
+	stringMap := make(map[string]string)
+	stringMap["test"] = "hello"
+	render.RenderTemplate(rw, "about.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
 
 }
