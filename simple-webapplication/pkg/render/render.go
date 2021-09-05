@@ -11,7 +11,7 @@ import (
 var fuctions = template.FuncMap{}
 
 func RenderTemplate(rw http.ResponseWriter, tmpl string) {
-	tc, err := RenderTemplateCache(rw)
+	tc, err := RenderTemplateCache()
 	if err != nil {
 		log.Fatal(err)
 		return
@@ -33,7 +33,7 @@ func RenderTemplate(rw http.ResponseWriter, tmpl string) {
 		return
 	}
 }
-func RenderTemplateCache(rw http.ResponseWriter) (map[string]*template.Template, error) {
+func RenderTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
 	pages, err := filepath.Glob("./templates/*.page.tmpl")
