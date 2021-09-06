@@ -57,6 +57,12 @@ func (b *HtmlBuilder) AddChild(childName, childText string) {
 	b.root.elements = append(b.root.elements, e)
 }
 
+func (b *HtmlBuilder) AddChildFluent(childName, childText string) *HtmlBuilder {
+	e := HtmlElement{childName, childText, []HtmlElement{}}
+	b.root.elements = append(b.root.elements, e)
+	return b
+}
+
 func main() {
 	hello := "HELLO"
 
@@ -81,5 +87,11 @@ func main() {
 	html.AddChild("li", "Home")
 	html.AddChild("li", "About")
 	html.AddChild("li", "Login")
+	fmt.Println(html.String())
+
+	html2 := NewHtmlBuilder("ul")
+	html2.AddChildFluent("li", "Home").
+		AddChildFluent("li", "About").
+		AddChildFluent("li", "Login")
 	fmt.Println(html.String())
 }
