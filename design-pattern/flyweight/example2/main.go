@@ -59,10 +59,12 @@ func main() {
 	john2 := NewUser2("John D")
 	jinny2 := NewUser2("Jinny D")
 	alsoJinny2 := NewUser2("Jinny C")
+	fmt.Println(john2.names)
+	fmt.Println(jinny2.names)
 
-	fmt.Println(john2.FullName())
-	fmt.Println(jinny2.FullName())
-	fmt.Println(alsoJinny2.FullName())
+	// fmt.Println(john2.FullName())
+	// fmt.Println(jinny2.FullName())
+	// fmt.Println(alsoJinny2.FullName())
 	fmt.Println("Memory taken by users:",
 		len([]byte(john2.names))+
 			len([]byte(jinny2.names))+
