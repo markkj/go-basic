@@ -54,6 +54,22 @@ func (e *ExpressionPrinter) String() string {
 	return e.sb.String()
 }
 
+type ExpressionEvaluator struct {
+	result float64
+}
+
+func (e *ExpressionEvaluator) VisitDoubleExpression(de *DoubleExpression) {
+	e.result = de.value
+}
+
+func (e *ExpressionEvaluator) VisitAdditionExpression(ae *AdditionExpression) {
+	ae.left.Accept(e)
+	x := e.result
+	ae.right.Accept(e)
+	x += e.result
+	e.result = x
+}
+
 func main() {
 	// 1+(2+3)
 	e := &AdditionExpression{
@@ -64,6 +80,13 @@ func main() {
 		},
 	}
 	ep := NewExpressionPrinter()
-	ep.VisitAdditionExpression(e)
-	fmt.Println(ep.String())
+	e.Accept(ep)
+	// ep.VisitAdditionExpression(e)
+	// fmt.Println(ep.String())
+
+	ee := &ExpressionEvaluator{}
+	e.Accept(ee)
+
+	fmt.Printf("%s = %g\n", ep, ee.result)
+
 }
