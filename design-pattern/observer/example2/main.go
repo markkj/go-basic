@@ -56,9 +56,21 @@ func (p *Person) SetAge(age int) {
 	if age == p.age {
 		return
 	}
+
+	oldCanVote := p.CanVote()
+
 	p.age = age
 	p.Fire(PropertyChange{"Age", p.age})
-	fmt.Println("Setting Age")
+
+	if oldCanVote != p.CanVote() {
+		p.Fire(PropertyChange{"CanVote", p.CanVote()})
+	}
+	fmt.Println("Setting Age to ", p.age)
+
+}
+
+func (p *Person) CanVote() bool {
+	return p.age >= 18
 }
 
 type TrafficManaged struct {
@@ -74,12 +86,28 @@ func (t *TrafficManaged) Notify(data interface{}) {
 	}
 }
 
+type ElectoralRoll struct {
+	o Observable
+}
+
+func (e *ElectoralRoll) Notify(data interface{}) {
+	if pc, ok := data.(PropertyChange); ok {
+		if pc.Name == "CanVote" && pc.Value.(bool) {
+			fmt.Println("Congrats, You can vote !")
+		}
+	}
+}
+
 func main() {
-	p := NewPerson(14)
+	p := NewPerson(17)
 	t := &TrafficManaged{p.Observable}
 	p.Subscribe(t)
 
-	for i := 15; i <= 19; i++ {
+	er := &ElectoralRoll{}
+	p.Subscribe(er)
+	p.UnSubscribe(er)
+	for i := 16; i <= 19; i++ {
 		p.SetAge(i)
 	}
+
 }
